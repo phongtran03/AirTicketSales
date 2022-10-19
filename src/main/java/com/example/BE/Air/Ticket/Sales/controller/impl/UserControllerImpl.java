@@ -14,8 +14,8 @@ public class UserControllerImpl implements UserController {
     UserService userService;
 
     @Override
-    public User createUser(@RequestBody User user) {
-        User user1 = userService.createUser(user);
-        return user1;
+    public String createUser(@RequestBody User user) {
+        String status = userService.createUser(user);
+        return status;
     }
 }

@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public interface UserController {
     @PostMapping
-    User createUser(@RequestBody User user);
+    String createUser(@RequestBody User user);
 }
