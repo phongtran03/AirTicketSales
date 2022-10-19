@@ -8,16 +8,20 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "user_role")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String username;
-    private String password;
-    private String email;
-    private String phone;
-    private String role;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "users_id")
+    private Users users;
+
 }

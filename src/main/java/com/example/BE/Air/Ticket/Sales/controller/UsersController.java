@@ -1,13 +1,16 @@
 package com.example.BE.Air.Ticket.Sales.controller;
 
-import com.example.BE.Air.Ticket.Sales.entity.User;
+import com.example.BE.Air.Ticket.Sales.entity.Users;
+import com.example.BE.Air.Ticket.Sales.utils.BaseResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/api/user")
-public interface UserController {
+public interface UsersController {
     @PostMapping
-    String createUser(@RequestBody User user);
+    ResponseEntity<BaseResponse<String>> createUsers(@RequestBody Users users);
+
+
 }
