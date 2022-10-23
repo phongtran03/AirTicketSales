@@ -1,5 +1,6 @@
 package com.example.BE.Air.Ticket.Sales.service.impl;
 
+import com.example.BE.Air.Ticket.Sales.dto.UserRequestDTO;
 import com.example.BE.Air.Ticket.Sales.entity.User;
 import com.example.BE.Air.Ticket.Sales.repository.UserRepository;
 import com.example.BE.Air.Ticket.Sales.service.UserService;
@@ -12,14 +13,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
     @Override
-    public User createUser(User user) {
-        User user1 = new User();
-        user1.setUsername(user.getUsername());
-        user1.setRole(user.getRole());
-        user1.setEmail(user.getEmail());
-        user1.setPhone(user.getPhone());
-        user1.setPassword(user.getPassword());
-        userRepository.save(user1);
-        return user1;
+    public User createUser(UserRequestDTO userRequestDTO) {
+        User user = new User();
+        user.setUsername(userRequestDTO.getUsername());
+        user.setPhone(userRequestDTO.getPhone());
+        user.setEmail(userRequestDTO.getEmail());
+        user.setPassword(userRequestDTO.getPassword());
+        user.setRoles(userRequestDTO.getRoles());
+        userRepository.save(user);
+        return user;
     }
 }

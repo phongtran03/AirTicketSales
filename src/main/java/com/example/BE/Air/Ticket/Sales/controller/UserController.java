@@ -1,5 +1,6 @@
 package com.example.BE.Air.Ticket.Sales.controller;
 
+import com.example.BE.Air.Ticket.Sales.dto.UserRequestDTO;
 import com.example.BE.Air.Ticket.Sales.entity.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,5 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/user")
 public interface UserController {
     @PostMapping
-    User createUser(@RequestBody User user);
+    User createUser(@RequestBody UserRequestDTO userRequestDTO);
+
 }

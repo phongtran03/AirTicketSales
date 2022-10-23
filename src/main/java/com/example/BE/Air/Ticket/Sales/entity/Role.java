@@ -10,21 +10,17 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "role")
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String username;
-    @JsonIgnore
-    private String password;
-    private String email;
-    private String phone;
+    private String roleName;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "role")
-    private Role roles;
+    @OneToMany(mappedBy = "roles")
+    List<User> users;
+
 }
