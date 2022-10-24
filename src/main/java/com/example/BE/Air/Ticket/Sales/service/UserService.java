@@ -6,5 +6,6 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
     User createUser(UserRequestDTO userRequestDTO);
+    Boolean deleteUser(long id);
 
 }

@@ -20,7 +20,7 @@ public class Role {
     private String roleName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     List<User> users;
 
 }
