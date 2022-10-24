@@ -58,14 +58,5 @@ public class UserServiceImpl<T> implements UserService{
         return null;
     }
 
-    @Override
-    public User findById(long id) {
-        Optional<User> user = userRepository.findById(id);
-        if(Objects.isNull(user)){
-            return null;
-        }
-        return user.get();
-    }
-
 
 }

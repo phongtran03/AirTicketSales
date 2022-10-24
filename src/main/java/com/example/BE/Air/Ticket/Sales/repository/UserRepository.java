@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT * FROM airticketsales.user where username = :username or email = :email", nativeQuery = true)
     User getUserByUsernameOrEmail(String username, String email);
+
+    Optional<User> findByUsername(String username);
 }

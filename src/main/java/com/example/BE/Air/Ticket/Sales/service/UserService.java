@@ -7,6 +7,5 @@ public interface UserService<T> {
     User createUser(UserRequestDTO userRequestDTO);
     Boolean deleteUser(long id);
     User getUserByUsernameAndEmail(String username, String email);
-    User findById(long id);
 
 }
