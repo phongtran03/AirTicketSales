@@ -28,11 +28,10 @@ public class UserControllerImpl implements UserController {
     @Override
     public CommonResponse deleteUser(long id) {
         try{
-            User user =
             User result = userService.deleteUser(id);
             return new CommonResponse<>("Thanh Cong", result);
         }catch (Exception e){
-            return new CommonResponse<>("That Bai", e.getMessage());
+            return new CommonResponse<>("That Bai", "Khong tim thay user");
         }
     }
 }
