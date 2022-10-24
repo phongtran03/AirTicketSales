@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -35,19 +36,17 @@ public class UserServiceImpl<T> implements UserService{
                 userRepository.save(user);
                 return user;
             }
-            return new User();
+            return null;
     }
 
-
-
     @Override
-    public User deleteUser(long id) {
+    public Boolean deleteUser(long id) {
         Optional<User> user = userRepository.findById(id);
         if(user == null){
-            return new User();
+            return false;
         }
         userRepository.delete(user.get());
-        return user.get();
+        return true;
     }
 
     @Override
@@ -56,7 +55,16 @@ public class UserServiceImpl<T> implements UserService{
         if(!ObjectUtils.isEmpty(user)){
             return user;
         }
-        return new User();
+        return null;
+    }
+
+    @Override
+    public User findById(long id) {
+        Optional<User> user = userRepository.findById(id);
+        if(Objects.isNull(user)){
+            return null;
+        }
+        return user.get();
     }
 
 

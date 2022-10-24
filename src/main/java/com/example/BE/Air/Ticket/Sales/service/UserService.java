@@ -5,8 +5,8 @@ import com.example.BE.Air.Ticket.Sales.entity.User;
 
 public interface UserService<T> {
     User createUser(UserRequestDTO userRequestDTO);
-    User deleteUser(long id);
-
+    Boolean deleteUser(long id);
     User getUserByUsernameAndEmail(String username, String email);
+    User findById(long id);
 
 }

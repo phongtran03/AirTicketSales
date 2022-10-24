@@ -1,5 +1,6 @@
 package com.example.BE.Air.Ticket.Sales.controller.impl;
 
+import com.example.BE.Air.Ticket.Sales.constant.ErrorMessage;
 import com.example.BE.Air.Ticket.Sales.controller.UserController;
 import com.example.BE.Air.Ticket.Sales.dto.UserRequestDTO;
 import com.example.BE.Air.Ticket.Sales.entity.User;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Objects;
+
 @RestController
 public class UserControllerImpl implements UserController {
     @Autowired
@@ -18,20 +21,37 @@ public class UserControllerImpl implements UserController {
     @Override
     public CommonResponse createUser(UserRequestDTO userRequestDTO) {
         try{
-            Object result = userService.createUser(userRequestDTO);
-            return new CommonResponse<>("Thanh cong", result);
+            User user = userService.getUserByUsernameAndEmail(userRequestDTO.getUsername(), userRequestDTO.getEmail());
+            User result = userService.createUser(userRequestDTO);
+            if(user == null){
+                return new CommonResponse<>(ErrorMessage.SUCCESS, result);
+            }
+            return new CommonResponse<>(ErrorMessage.USER_OR_EMAIL_ALREADY_EXIST, result);
         } catch (Exception e){
-            return new CommonResponse<>("That Bai", e.getMessage());
+            return new CommonResponse<>(ErrorMessage.FAILED, e.getMessage());
+        }
+    }
+
+    @Override
+    public CommonResponse userByUsernameOrEmail(String username, String email) {
+        try{
+            User user = userService.getUserByUsernameAndEmail(username, email);
+            if(user == null){
+                return new CommonResponse<>(ErrorMessage.FAILED, ErrorMessage.USER_DOES_NOT_EXIST);
+            }
+            return new CommonResponse<>(ErrorMessage.SUCCESS, user);
+        }catch (Exception e){
+            return new CommonResponse<>(ErrorMessage.FAILED, e.getMessage());
         }
     }
 
     @Override
     public CommonResponse deleteUser(long id) {
         try{
-            User result = userService.deleteUser(id);
-            return new CommonResponse<>("Thanh Cong", result);
+            Boolean result = userService.deleteUser(id);
+            return new CommonResponse<>(ErrorMessage.SUCCESS, result);
         }catch (Exception e){
-            return new CommonResponse<>("That Bai", "Khong tim thay user");
+            return new CommonResponse<>(ErrorMessage.FAILED, e.getMessage());
         }
     }
 }

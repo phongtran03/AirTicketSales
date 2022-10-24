@@ -11,7 +11,10 @@ public interface UserController {
     @PostMapping
     CommonResponse createUser(@RequestBody UserRequestDTO userRequestDTO);
 
-    @DeleteMapping("deleteUserById")
+    @GetMapping("/userByUsernameOrEmail")
+    CommonResponse userByUsernameOrEmail(String username, String email);
+
+    @DeleteMapping("/deleteUserById")
     CommonResponse deleteUser(@RequestParam long id);
 
 }
