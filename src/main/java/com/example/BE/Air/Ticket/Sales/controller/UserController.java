@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public interface UserController {
     @PostMapping
-    User createUser(@RequestBody UserRequestDTO userRequestDTO);
-
+    CommonResponse createUser(@RequestBody UserRequestDTO userRequestDTO);
 
     @DeleteMapping("deleteUserById")
     CommonResponse deleteUser(@RequestParam long id);

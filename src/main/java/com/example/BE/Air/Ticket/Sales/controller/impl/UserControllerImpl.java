@@ -16,17 +16,23 @@ public class UserControllerImpl implements UserController {
     UserService userService;
 
     @Override
-    public User createUser(UserRequestDTO userRequestDTO) {
-        return userService.createUser(userRequestDTO);
+    public CommonResponse createUser(UserRequestDTO userRequestDTO) {
+        try{
+            Object result = userService.createUser(userRequestDTO);
+            return new CommonResponse<>("Thanh cong", result);
+        } catch (Exception e){
+            return new CommonResponse<>("That Bai", e.getMessage());
+        }
     }
 
     @Override
     public CommonResponse deleteUser(long id) {
         try{
-            Boolean result = userService.deleteUser(id);
+            User user =
+            User result = userService.deleteUser(id);
             return new CommonResponse<>("Thanh Cong", result);
         }catch (Exception e){
-            return new CommonResponse<>("That Bai", e);
+            return new CommonResponse<>("That Bai", e.getMessage());
         }
     }
 }

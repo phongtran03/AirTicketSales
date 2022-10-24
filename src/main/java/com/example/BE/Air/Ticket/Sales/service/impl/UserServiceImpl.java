@@ -8,12 +8,12 @@ import com.example.BE.Air.Ticket.Sales.repository.UserRepository;
 import com.example.BE.Air.Ticket.Sales.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl<T> implements UserService{
 
     @Autowired
     UserRepository userRepository;
@@ -30,14 +30,33 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userRequestDTO.getPassword());
         Role role = roleRepository.getById(userRequestDTO.getRoles());
         user.setRoles(role);
-        userRepository.save(user);
-        return user;
+        User userByUsernameAndEmail = getUserByUsernameAndEmail(userRequestDTO.getUsername(), userRequestDTO.getEmail());
+            if(userByUsernameAndEmail == null) {
+                userRepository.save(user);
+                return user;
+            }
+            return new User();
+    }
+
+
+
+    @Override
+    public User deleteUser(long id) {
+        Optional<User> user = userRepository.findById(id);
+        if(user == null){
+            return new User();
+        }
+        userRepository.delete(user.get());
+        return user.get();
     }
 
     @Override
-    public Boolean deleteUser(long id) {
-        userRepository.deleteById(id);
-        return true;
+    public User getUserByUsernameAndEmail(String username, String email) {
+        User user = userRepository.getUserByUsernameOrEmail(username, email);
+        if(!ObjectUtils.isEmpty(user)){
+            return user;
+        }
+        return new User();
     }
 
 
