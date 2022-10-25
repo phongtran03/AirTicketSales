@@ -14,7 +14,7 @@ import java.util.stream.DoubleStream;
 @Table(name = "role")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Role {
+public class Role extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
