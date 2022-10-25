@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping
-public interface TestController {
+public interface UserRequestController {
     @GetMapping("/")
     public String welcome();
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public TokenUserDTO generateToken(@RequestBody AuthRequest authrequest) throws Exception;
 }

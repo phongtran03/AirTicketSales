@@ -1,22 +1,17 @@
 package com.example.BE.Air.Ticket.Sales.controller.impl;
 
-import com.example.BE.Air.Ticket.Sales.controller.TestController;
 import com.example.BE.Air.Ticket.Sales.dto.AuthRequest;
 import com.example.BE.Air.Ticket.Sales.dto.TokenUserDTO;
 import com.example.BE.Air.Ticket.Sales.entity.UserToken;
 import com.example.BE.Air.Ticket.Sales.repository.UserTokenRepository;
 import com.example.BE.Air.Ticket.Sales.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 @RestController
-public class TestControllerImpl implements TestController {
+public class UserRequestController implements com.example.BE.Air.Ticket.Sales.controller.UserRequestController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
