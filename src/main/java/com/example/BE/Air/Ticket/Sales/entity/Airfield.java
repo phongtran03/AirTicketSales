@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "airfield")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Airfield {
+public class Airfield extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

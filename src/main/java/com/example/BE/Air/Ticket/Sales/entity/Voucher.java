@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Table(name = "voucher")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Voucher {
+public class Voucher extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
