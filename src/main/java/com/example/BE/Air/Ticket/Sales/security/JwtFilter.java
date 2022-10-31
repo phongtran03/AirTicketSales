@@ -36,8 +36,16 @@ public class JwtFilter extends OncePerRequestFilter {
         String autherizationHeader = request.getHeader("Authorization");
         String token = null;
         String username = null;
-        doFilter(request, response, filterChain);
-
+        String paramUrl = "";
+        String action = "";
+        String requestUri = request.getRequestURI();
+        if (requestUri.startsWith("/api/user")) {
+            String[] parts = requestUri.split("/");
+            paramUrl = "/" + parts[2];
+            if (parts.length >= 4) {
+                action = parts[3];
+            }
+        }
         if (autherizationHeader != null && autherizationHeader.startsWith("Bearer")) {
             token = autherizationHeader.substring(7);
             username = jwtUtill.extractUsername(token);
@@ -58,27 +66,27 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
 
-    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "*");
-        response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
-        String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
-        String method = request.getMethod();
-        String activityKey = request.getHeader("activityKey");
-        String userName = request.getHeader("userName");
-        String paramUrl = "";
-        String requestUri = request.getRequestURI();
-        String queryString = request.getQueryString();
-        String action = "";
-        if (requestUri.startsWith("/api")) {
-            String[] parts = requestUri.split("/");
-            paramUrl = "/" + parts[2];
-            if (parts.length >= 4) {
-                action = parts[3];
-            }
-        }
+//    public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+//        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+//        response.setHeader("Access-Control-Allow-Headers", "*");
+//        response.addHeader("Access-Control-Expose-Headers", "xsrf-token");
+//        String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+//        String method = request.getMethod();
+//        String activityKey = request.getHeader("activityKey");
+//        String userName = request.getHeader("userName");
+//        String paramUrl = "";
+//        String requestUri = request.getRequestURI();
+//        String queryString = request.getQueryString();
+//        String action = "";
+//        if (requestUri.startsWith("/api")) {
+//            String[] parts = requestUri.split("/");
+//            paramUrl = "/" + parts[2];
+//            if (parts.length >= 4) {
+//                action = parts[3];
+//            }
+//        }
 
 //        if (!(method.equals("POST") || method.equals("GET")) || paramUrl.isEmpty() ||
 //                (paramUrl.equals("/setting") && action.equals("downloadTemplateProfile"))) {
@@ -95,6 +103,4 @@ public class JwtFilter extends OncePerRequestFilter {
 //            chain.doFilter(request, response);
 //        }
 
-
-    }
 }
