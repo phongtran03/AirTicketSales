@@ -9,6 +9,7 @@ import com.example.BE.Air.Ticket.Sales.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -45,7 +46,7 @@ public class UserServiceImpl<T> implements UserService{
         if(user == null){
             return false;
         }
-        userRepository.delete(user.get());
+        userRepository.deleteById(id);
         return true;
     }
 

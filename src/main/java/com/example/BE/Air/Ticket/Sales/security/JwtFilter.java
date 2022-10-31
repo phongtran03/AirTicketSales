@@ -1,19 +1,14 @@
 package com.example.BE.Air.Ticket.Sales.security;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.example.BE.Air.Ticket.Sales.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +16,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import org.springframework.stereotype.Component;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -39,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String paramUrl = "";
         String action = "";
         String requestUri = request.getRequestURI();
-        if (requestUri.startsWith("/api/user")) {
+        if (requestUri.startsWith("/api/v1/user")) {
             String[] parts = requestUri.split("/");
             paramUrl = "/" + parts[2];
             if (parts.length >=2) {
