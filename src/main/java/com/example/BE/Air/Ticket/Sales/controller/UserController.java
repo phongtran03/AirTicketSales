@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/user")
 public interface UserController {
-    @PostMapping
+    @PostMapping("/register")
     ResponseEntity<CommonResponse> createUser(@RequestBody UserRequestDTO userRequestDTO);
 
     @PostMapping("/userByUsernameOrEmail") //getUser BODY
