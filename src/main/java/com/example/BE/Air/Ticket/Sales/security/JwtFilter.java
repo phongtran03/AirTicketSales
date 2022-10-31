@@ -42,7 +42,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (requestUri.startsWith("/api/user")) {
             String[] parts = requestUri.split("/");
             paramUrl = "/" + parts[2];
-            if (parts.length >= 4) {
+            if (parts.length >=2) {
                 action = parts[3];
             }
         }
