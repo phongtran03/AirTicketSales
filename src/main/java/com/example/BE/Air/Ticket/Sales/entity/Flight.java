@@ -29,7 +29,6 @@ public class Flight extends BaseEntity{
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
-
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "flights_id", insertable=false, updatable=false, nullable=false)
     private Airfield airfield;

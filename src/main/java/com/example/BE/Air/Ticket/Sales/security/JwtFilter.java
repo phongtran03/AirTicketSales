@@ -33,7 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String paramUrl = "";
         String action = "";
         String requestUri = request.getRequestURI();
-        if (requestUri.startsWith("/api/v1/user")) {
+        if (requestUri.startsWith("/api/v1/user") || requestUri.startsWith("/api/v1/airField")) {
             String[] parts = requestUri.split("/");
             paramUrl = "/" + parts[2];
             if (parts.length >=2) {
